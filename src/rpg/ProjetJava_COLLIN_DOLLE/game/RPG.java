@@ -8,8 +8,7 @@ public class RPG {
         System.out.println("--Menu--");
         System.out.println("Choisir votre personnage");
         String choice = sc.nextLine();
-        
-        
+        characterChoice(choice);        
     }
     
 }

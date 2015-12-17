@@ -12,33 +12,19 @@ public class Character {
 
     private int maxDexterity;
 
-    private void characterChoice(int choice){
-        switch{
-            case 1:
-                
-            case 2:
-                
-            case 3:
+    private void characterChoice(String choice){
+        if(choice=="1"){
+            
+        }
+        else if(choice=="2"){
+            
+        }else if(choice=="3"){
+            
+        }else if(choice=="4"){
+            
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        
     public void applyEffect() {
     }
 
