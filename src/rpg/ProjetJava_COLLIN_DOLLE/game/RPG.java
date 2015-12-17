@@ -1,4 +1,4 @@
-package rpg;
+package rpg.ProjetJava_COLLIN_DOLLE.jeu;
 import java.util.Scanner;
 
 public class RPG {
@@ -8,8 +8,8 @@ public class RPG {
         System.out.println("--Menu--");
         System.out.println("Choisir votre personnage");
         String choice = sc.nextLine();
-
-
+        
+        
     }
     
 }

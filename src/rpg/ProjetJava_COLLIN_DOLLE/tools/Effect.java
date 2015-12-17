@@ -1,4 +1,6 @@
-package rpg;
+package rpg.ProjetJava_COLLIN_DOLLE.tools;
+
+import rpg.ProjetJava_COLLIN_DOLLE.Charactere.Characteristic;
 
 public class Effect {
 
