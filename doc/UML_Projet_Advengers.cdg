@@ -112,7 +112,7 @@
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Parry" package="" visibility="public" xPosition="200.0" yPosition="412.0">
+    <Class name="Block" package="" visibility="public" xPosition="200.0" yPosition="412.0">
       <Fields/>
       <Constructors/>
       <Methods/>
@@ -143,22 +143,22 @@
     </Enum>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Attack" target="Capacity"/>
-    <HasRelation name="play with" source="Player" target="Character" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="actionType" source="Action" target="Capacity" type="Default" sourceCardinality="0..1" targetCardinality="0..1"/>
+    <IsRelation name="is" source="Thor" target="Character"/>
     <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Treatment" target="Capacity"/>
+    <IsRelation name="is" source="Weapon" target="Item"/>
+    <HasRelation name="stuff" source="Character" target="Item" type="Composition" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Attack" target="Capacity"/>
+    <IsRelation name="is" source="Hulk" target="Character"/>
+    <IsRelation name="is" source="Consumable" target="Item"/>
+    <HasRelation name="effects" source="Item" target="Effect" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="play" source="Turn" target="Action" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="play with" source="Player" target="Character" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="CaptainAmerica" target="Character"/>
+    <HasRelation name="actionType" source="Action" target="Capacity" type="Default" sourceCardinality="0..1" targetCardinality="0..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Block" target="Capacity"/>
+    <IsRelation name="is" source="Armor" target="Item"/>
     <IsRelation name="is" source="IronMan" target="Character"/>
     <HasRelation name="capacities" source="Character" target="Capacity" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <IsRelation name="is" source="Consumable" target="Item"/>
-    <IsRelation name="is" source="Armor" target="Item"/>
-    <IsRelation name="is" source="Thor" target="Character"/>
-    <IsRelation name="is" source="CaptainAmerica" target="Character"/>
-    <HasRelation name="stuff" source="Character" target="Item" type="Composition" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
-    <IsRelation name="is" source="Hulk" target="Character"/>
-    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Parry" target="Capacity"/>
     <HasRelation name="basisCharacteristics" source="Character" target="Characteristic" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="play" source="Turn" target="Action" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
-    <HasRelation name="effects" source="Item" target="Effect" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
-    <IsRelation name="is" source="Weapon" target="Item"/>
   </ClassDiagramRelations>
 </ClassDiagram>

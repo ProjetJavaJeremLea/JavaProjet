@@ -12,64 +12,27 @@ public class Character {
 
     private int maxDexterity;
 
-    private void characterChoice(String choice){
+    public void characterChoice(String choice,String name){
         if(choice=="1"){
-            
+            Character myCharacter =new Thor(name);
         }
         else if(choice=="2"){
-            
-        }else if(choice=="3"){
-            
-        }else if(choice=="4"){
-            
+            Character myCharacter =new CaptainAmerica(name);
+        }
+        else if(choice=="3"){
+            Character myCharacter =new IronMan(name);
+        }
+        else if(choice=="4"){
+            Character myCharacter =new Hulk(name);
         }
     }
-        
-    public void applyEffect() {
-    }
 
-    public void wearWeapon() {
-    }
-
-    public void wearArmor() {
-    }
-
-    public int getStuffWeight() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void removeItem() {
-    }
-
-    public void addItem() {
-    }
-
-    public void maxHealthCalculation() {
-    }
-
-    public void maxWeightCalculation() {
-    }
-
-    public void maxDexterityCalculation() {
-    }
-
-    public void incrementLevel() {
-    }
-
-    public int CharacteristicSum() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public int getCharacteristicValue() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void initializeCharacteristics() {
-    }
-
-    public void verifyCharacteristics() {
-    }
-
-    public void initializeCapacity() {
-    }
+    public Character(String name, int level, int maxWeight, int maxHealth, int maxDexterity) {
+        this.name = name;
+        this.level = level;
+        this.maxWeight = maxWeight;
+        this.maxHealth = maxHealth;
+        this.maxDexterity = maxDexterity;
+    }  
+    
 }
