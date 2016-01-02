@@ -1,62 +1,58 @@
 package rpg;
 
-import java.util.Random;
-import java.util.Scanner;
+import gameCharacters.Enemy;
+import gameCharacters.Hero;
 
-import enemies.Anubis;
-import enemies.Enemy;
-import enemies.Mummy;
-import enemies.Pharaoh;
-import enemies.Snake;
-import enemies.Spider;
-
-public class Game {
-
-	//FIELDS\\
-	private Enemy Spider;
-	private	Enemy Snake;
-	private	Enemy Mummy;
-	private	Enemy Pharaoh;
-	private	Enemy Anubis;
-	private Hero heroPlayer;
-	Random rand = new Random();	
-	Scanner sc = new Scanner(System.in);
-
-	//METHODS
-	public Hero start(){
+public class Game { // 1 game = 1 player
+	
+	private Boolean endGame;
+		
+	public Game(){
+		this.endGame=false;
+	}
+	
+	//GETTERS AND SETTERS
+	public Boolean getEndGame() {
+		return endGame;
+	}
+	public void setEndGame(Boolean endGame) {
+		this.endGame = endGame;
+	}
+	
+	public void beginGame(){
+		
 		System.out.println("    ##                              ##");
 		System.out.println("   ####   Welcome To The Pyramid   ####");
-		System.out.println("  ######       Of The Dead !      ######");
-		System.out.println("______________________________________________");
-		System.out.println("Enter Your NAME to enter in The Pyramide:");
-		String name = sc.nextLine();
-		heroPlayer = new Hero(name);
-		return heroPlayer;
-	}
-	
-	public Enemy[] createEnemies(){
-		Spider = new Spider();
-		Snake = new Snake();
-		Mummy = new Mummy();
-		Pharaoh = new Pharaoh();
-		Anubis = new Anubis();
-		Enemy[] enemies={Spider,Snake,Mummy,Pharaoh,Anubis};
-		return enemies;
-	}
-	
-	public Enemy enemyAppear(Enemy[] enemies){
-		System.out.println("______________________________________________");
-		Enemy enemy= enemies[rand.nextInt(enemies.length)];
-		System.out.println("\t >>A(n) " + enemy.getName() + " is on your way !!<< \n");
-		return enemy;
-	}
-	
-	public void gameEnd(){
-		System.out.println("______________________________________________");
+		System.out.println("  ######       Of The Death !     ######");
+		System.out.println("___________________________________________\n");
+		System.out.println("Add Your NAME to enter in The Pyramid:");
+		
+		Hero heroPlayer = new Hero(); // Ask for the name and create the hero with
+		
+		System.out.println("\nDear "+heroPlayer.getHeroName()+",");
+		System.out.println("You have "+heroPlayer.gethP()+" HP to begin the game.");
+		System.out.println("The pyramid offers you 3 health potions.");
+		System.out.println("Good luck! \n");
+		// RAJOUTER PRESS ENTER TO CONTINUE
+				
+		while (!this.getEndGame()){
+		
+			Round round = new Round();
 
-		System.out.println("\t#########################");
-		System.out.println("\t# THANK YOU FOR PLAYING #");
-		System.out.println("\t#########################");	
+			while(!round.getEndRound()){
+				Enemy theEnemy = round.beginRound(heroPlayer);
+				round.choicesAndActions(heroPlayer,theEnemy);
+			}
+			System.out.println("\tEnd of the round"); //faire un compteur de round?	
+			this.setEndGame(round.getEndGame());
+		}
+		System.out.println("\tEnd of the game");
+
 	}
+
+	// end quand mort ou courage=0 ou exit faire un truc un peu mieux
+	// end quand xp = 3600 environ A FAIRE
+	
+	
 
 }
