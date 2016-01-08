@@ -1,7 +1,10 @@
 package polytech.dc.rpg;
 import polytech.dc.event.Controler;
 import java.util.Random;
+import polytech.dc.accessory.Accessory;
+import polytech.dc.accessory.HealthPotion;
 import polytech.dc.event.Action;
+import polytech.dc.event.DisplayStory;
 import polytech.dc.gameCharacters.Anubis;
 import polytech.dc.gameCharacters.Enemy;
 import polytech.dc.gameCharacters.Hero;
@@ -63,7 +66,7 @@ public class Round { //1 round  = 1 enemy
             Enemy[] enemies = {mummy, pharaoh};
             return enemies;
         } else if (level == 9) {
-            Enemy[] enemies = {pharaoh, anubis};
+            Enemy[] enemies = {pharaoh};
             return enemies;
         } else {
             Enemy[] enemies = {anubis};
@@ -73,79 +76,102 @@ public class Round { //1 round  = 1 enemy
 
     // AN ENEMY APPEARS
     public Enemy enemyAppear(Hero heroPlayer, Enemy[] enemies) {
-        System.out.println("_____________________________________________\n");
+        System.out.println("__________________________________________________________________\n");
         Enemy enemy = enemies[rand.nextInt(enemies.length)];// est-ce que c'est pas length - 1
         System.out.println("Level " + heroPlayer.getLevel());
-        System.out.println("\t>>A(n) " + enemy.getType() + " is on your way !!<< \n");
+        System.out.println("\t\t >>A(n) " + enemy.getType() + " is on your way !!<< \n");
         return enemy;
     }
 
     // DEATH OF THE ENEMY
     public void enemyDeath(Hero heroPlayer, Enemy enemy,Action action) {
         heroPlayer.increaseXP(enemy.getXpGiven());
-        System.out.println("______________________________________________\n");
-        System.out.println("\t# " + enemy.getType() + " was defeated !! # ");
-        System.out.println("\t# You have " + heroPlayer.gethP() + " HP left.   # ");
-        System.out.println("\t# You have " + heroPlayer.getxP() + " XP now.    # ");
-        System.out.println("______________________________________________\n");
+        System.out.println("__________________________________________________________________\n");
+        System.out.println("\t\t# " + enemy.getType() + " was defeated !! # ");
+        System.out.println("\t\t# You have " + heroPlayer.gethP() + " HP left.   # ");
+        System.out.println("\t\t# You have " + heroPlayer.getxP() + " XP now.    # ");
+        System.out.println("__________________________________________________________________\n");
         //Potions, weapon, armor
-        System.out.println(" \tYou have " + heroPlayer.getNbHealthPotions() + " Health potions left. ");
+        System.out.println("\t\t You have " + heroPlayer.getNbHealthPotions() + " Health potions left. ");
         if (!action.enemyGivePotion(heroPlayer, enemy)) {
             enemy.giveWeapon(heroPlayer);
         }
     }
 
-    // FONCTIONS CALLED BY THE GAME
-    public Enemy beginRound(Hero heroPlayer) {
-        Enemy[] enemies = this.createEnemies(heroPlayer.getLevel());
-        Enemy myEnemy = this.enemyAppear(heroPlayer, enemies);
-        return myEnemy;
-    }
-
     //RESULT ATTACK DISPLAY
-    public void displayResultAttack(Hero heroPlayer, Enemy enemy,Action action) {
-        System.out.println("\t-------------------------------------");
-        System.out.println("\t>> You strike the " + enemy.getType() + " for " + heroPlayer.getStrength() + " damage !");
-        System.out.println("\t>> with " + heroPlayer.getWeapon().getType());
-        System.out.println("\t>> and you lose " + action.enemyAttack(heroPlayer, enemy) + " HP.");
-        System.out.println("\t-------------------------------------\n");
-    }
+    public void displayResultAttack(Hero heroPlayer, Enemy enemy,int damage,Action action) {
+        System.out.println("--------------------------------------------------------------------");
+        System.out.println("\t\t >> You strike the " + enemy.getType() + " for " + heroPlayer.getStrength() + " damage !");
+        System.out.println("\t\t >> with " + heroPlayer.getWeapon().getType());
+        System.out.println("\t\t >> and you lose " + damage + " HP.");
+        System.out.println("--------------------------------------------------------------------\n");
+        if (heroPlayer.dead()) {
+            System.out.println("\t\t >> You limp out of the Pyramid, weak from battle !\n");
+            DisplayStory.loose();
+            setEndRound(true);
+            setEndGame(true);
+        }
+        if (enemy.gethP() <= 0) {
+            if (enemy instanceof Anubis) {
+                DisplayStory.winBoss();
+                this.endRound=true;
+                this.endGame=true;
 
+            } else {
+                enemyDeath(heroPlayer, enemy, action); // THE ENEMY IS DEAD
+                setEndRound(true);
+                heroPlayer.heroChangeLevel();
+            }
+        }
+    }
     public void displayRunAway(Hero heroPlayer, Enemy enemy) {
-        System.out.println("\t-------------------------------------");
-        System.out.println("\t>> You run away from the " + enemy.getType() + "!! ");
+        System.out.println("--------------------------------------------------------------------");
+        System.out.println("\t\t >> You run away from the " + enemy.getType() + "!! ");
         heroPlayer.reduceBrave();
-        System.out.println("\t>> You lose 5 points of brave... ");
-        System.out.println("\t-------------------------------------\n");
+        System.out.println("\t\t >> You lose 5 points of brave... ");
+        System.out.println("--------------------------------------------------------------------\n");
     }
 
     //Round
     public void action(Hero heroPlayer, Enemy enemy) {
         Action action = new Action();
-
-        while (!this.endRound) {		//Battle loop...
+        
+        while (!this.endRound) {//Battle loop...
             int choice = Controler.displayChoices(heroPlayer, enemy);
             if (choice == 1) { //Choice 1 --> Attack
                 action.fight(this, heroPlayer, enemy);
             } else if (choice == 2) { //run away
                 action.runAway(this, heroPlayer, enemy);
             } else if (choice == 3) { //Choice 3 --> Drink a health potion
-                action.heroDrinkPotion(heroPlayer);
+                action.heroDrinkPotion(heroPlayer,new HealthPotion());
             } else {
-                System.out.println("\t>>Invalid command... ");
+                System.out.println("\t\t >>Invalid command... ");
             }
         } //end loop
         
         if (!this.endGame) {
-            int choiceTwo = Controler.displayAfterFight();
-            if (choiceTwo == 1) {
+            int choice = Controler.displayAfterFight();
+            if (choice == 1) {
                 action.continueAdventure(this);
             } 
             else {
-                System.out.println("\tYou left the Pyramid !");
+                System.out.println("\t\t You left the Pyramid !");
                 this.endRound = true;
                 this.endGame = true;// fin du jeu 
             }
         }
+    }
+    
+    public void bossFight(Hero heroPlayer){
+        Anubis anubis = new Anubis();
+        DisplayStory.boss(heroPlayer);
+        
+        for(int i=0;i<heroPlayer.getNbHealthPotions();i++){
+            HealthPotion potion = new HealthPotion();
+            heroPlayer.increaseHP(potion.getStrength());
+        }
+        
+        heroPlayer.setNbHealthPotions(0);
+        this.action(heroPlayer, anubis);
     }
 }

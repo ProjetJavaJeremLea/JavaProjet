@@ -5,8 +5,15 @@
         <group>
             <file>file:/C:/Users/jeremy/Documents/NetBeansProjects/rpg_Dolle_Collin/src/polytech/dc/event/Action.java</file>
             <file>file:/C:/Users/jeremy/Documents/NetBeansProjects/rpg_Dolle_Collin/src/polytech/dc/gameCharacters/GameCharacter.java</file>
+            <file>file:/C:/Users/jeremy/Documents/NetBeansProjects/rpg_Dolle_Collin/src/polytech/dc/accessory/Potion.java</file>
+            <file>file:/C:/Users/jeremy/Documents/NetBeansProjects/rpg_Dolle_Collin/src/polytech/dc/gameCharacters/Mummy.java</file>
+            <file>file:/C:/Users/jeremy/Documents/NetBeansProjects/rpg_Dolle_Collin/src/polytech/dc/gameCharacters/Hero.java</file>
+            <file>file:/C:/Users/jeremy/Documents/NetBeansProjects/rpg_Dolle_Collin/src/polytech/dc/accessory/DamagePotion.java</file>
+            <file>file:/C:/Users/jeremy/Documents/NetBeansProjects/rpg_Dolle_Collin/src/polytech/dc/event/Controler.java</file>
             <file>file:/C:/Users/jeremy/Documents/NetBeansProjects/rpg_Dolle_Collin/src/polytech/dc/gameCharacters/Enemy.java</file>
+            <file>file:/C:/Users/jeremy/Documents/NetBeansProjects/rpg_Dolle_Collin/src/polytech/dc/rpg/Game.java</file>
             <file>file:/C:/Users/jeremy/Documents/NetBeansProjects/rpg_Dolle_Collin/src/polytech/dc/rpg/Round.java</file>
+            <file>file:/C:/Users/jeremy/Documents/NetBeansProjects/rpg_Dolle_Collin/src/polytech/dc/accessory/Accessory.java</file>
         </group>
     </open-files>
 </project-private>

@@ -6,7 +6,7 @@ public class HealthPotion extends Potion {
     public HealthPotion() {
         super(TypeAccessory.healthPotion);
         Random rand = new Random();
-        super.setStrength(rand.nextInt(100));
+        super.setStrength(rand.nextInt(20));
     }
 
 }

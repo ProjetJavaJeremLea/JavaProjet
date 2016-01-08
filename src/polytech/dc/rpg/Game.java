@@ -6,7 +6,8 @@ import polytech.dc.gameCharacters.Hero;
 public class Game { // 1 game = 1 player
 
     private Boolean endGame;
-
+    private final int LEVEL_BOSS=10;
+    
     //CONSTRUCTOR
     public Game() {
         this.endGame = false;
@@ -15,20 +16,24 @@ public class Game { // 1 game = 1 player
     //GAME
     public void beginGame() {
         
-        String name = Controler.DisplayNewHero();
+        String name = Controler.displayNewHero();
         Hero heroPlayer = new Hero(name);
-        Controler.DisplayWelcome(heroPlayer);
+        Controler.displayWelcome(heroPlayer);
 
         while (!this.endGame) {
             Round round = new Round();
             while (!round.getEndRound()) {
-                Enemy theEnemy = round.beginRound(heroPlayer);
-                round.action(heroPlayer, theEnemy);
+                if (heroPlayer.getLevel() < LEVEL_BOSS) {
+                    Enemy enemy = round.enemyAppear(heroPlayer, round.createEnemies(heroPlayer.getLevel()));
+                    round.action(heroPlayer, enemy);
+                }
+                else{
+                    round.bossFight(heroPlayer);
+                }
             }
-            System.out.println("\tEnd of the round");
             this.endGame=round.getEndGame();
         }
-        System.out.println("\tEnd of the game");
+        
     }
     // end quand mort ou courage=0 ou exit faire un truc un peu mieux
     // end quand xp = 3600 environ A FAIRE

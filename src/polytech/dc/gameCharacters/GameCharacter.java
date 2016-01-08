@@ -1,6 +1,5 @@
 package polytech.dc.gameCharacters;
 
-import java.util.Random;
 
 public class GameCharacter { //pas mis en abstract car j'arrivais pas à aller chercher l'attribut hp dans les sous classes
 
@@ -18,4 +17,7 @@ public class GameCharacter { //pas mis en abstract car j'arrivais pas à aller c
         this.hP = hP;
     }
 
+    public void reduceHP(int removHp) {
+        this.hP-= removHp;
+    }
 }
