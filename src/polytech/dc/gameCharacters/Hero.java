@@ -132,11 +132,11 @@ public class Hero extends GameCharacter {
             }
         }
     }
+    
     //REMOVE IN THE INVENTORY
     public void removeinInventory(Accessory accessory) {
         this.inventory.remove(accessory);
     }
-    
     //EXCHANGE SWORD
     public void swapAccessory(Accessory removeAccess, Accessory addAccess) {
         this.removeinInventory(removeAccess);

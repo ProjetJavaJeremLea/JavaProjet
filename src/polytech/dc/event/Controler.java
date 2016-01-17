@@ -2,14 +2,13 @@ package polytech.dc.event;
 import java.util.ArrayList;
 import java.util.Scanner;
 import polytech.dc.accessory.Accessory;
-import polytech.dc.accessory.DamagePotion;
-import polytech.dc.accessory.Weapon;
 import polytech.dc.gameCharacters.Enemy;
 import polytech.dc.gameCharacters.Hero;
 
 public final class Controler {
     
     static Scanner sc=new Scanner(System.in);
+    static boolean continueInput = true;
     
     public static String displayNewHero(){
         DisplayStory.pyramid();
@@ -37,12 +36,21 @@ public final class Controler {
         System.out.println("\t\tWhat would you like to do ?!");
         System.out.println("\t\t1. Fight again");
         System.out.println("\t\t2. Exit the Pyramid");
-        int choice = sc.nextInt();
-
+        int choice = 0;
+        do {
+            try {
+                choice = sc.nextInt();
+                continueInput = false;
+            } catch (Exception ex) {
+                System.out.println("\t\tInvalid command... Press a valid one !");
+                sc.nextLine();
+            }
+        } while (continueInput);
         while (choice != 1 && choice != 2) {
             System.out.println("\t\tInvalid command... Press a valid one !");
             choice = sc.nextInt();
         }
+        continueInput=true;
         return choice;
     }
     
@@ -56,7 +64,21 @@ public final class Controler {
         if (heroPlayer.getNbHealthPotions() > 0) {
             System.out.println("\t\t\t3. Drink health potion");
         }
-        int choice = sc.nextInt();
+        int choice = 0;
+        do {
+            try {
+                choice = sc.nextInt();
+                continueInput = false;
+            } catch (Exception ex) {
+                System.out.println("\t\tInvalid command... Press a valid one !");
+                sc.nextLine();
+            }
+        } while (continueInput);
+        while (choice >= 3 && heroPlayer.getNbHealthPotions() < 0) {
+            System.out.println("\t\tInvalid command... Press a valid one !");
+            choice = sc.nextInt();
+        }
+        continueInput = true;
         return choice;
     }
     
@@ -65,26 +87,45 @@ public final class Controler {
         System.out.println("\t\tDo you want to swap it for an other?");
         System.out.println("\t\t1. Yes");
         System.out.println("\t\t2. No");
-        int choice = sc.nextInt();
+        int choice = 0;
+        do {
+            try {
+                choice = sc.nextInt();
+                continueInput = false;
+            } catch (Exception ex) {
+                System.out.println("\t\tInvalid command... Press a valid one !");
+                sc.nextLine();
+            }
+        } while (continueInput);
         while (choice != 1 && choice != 2) {
             System.out.println("\t\tInvalid command... Press a valid one !");
             choice = sc.nextInt();
         }
+        continueInput=true;
         return choice;
     }
 
     public static int displaySawpAccessory(ArrayList<Accessory> inventory) {
         int i = 0;
-        int choice;
+        int choice=0;
         for (Accessory accessory : inventory) {
             i++;
                 System.out.println("\t" + i + ". " + accessory.getType() + " available for " + accessory.getDurability() + " round(s) " + "and strenght value is :"+accessory.getStrength() );
         }
-        choice = sc.nextInt();
-        while(choice>inventory.size()){
+        do {
+            try {
+                choice = sc.nextInt();
+                continueInput = false;
+            } catch (Exception ex) {
+                System.out.println("\t\tInvalid command... Press a valid one !");
+                sc.nextLine();
+            }
+        } while (continueInput);
+        while (choice > inventory.size()) {
             System.out.println("\t\tInvalid command... Press a valid one !");
             choice = sc.nextInt();
         }
+        continueInput=true;
         return choice;
     }
 
@@ -92,11 +133,22 @@ public final class Controler {
         System.out.println("\t\tYou have an Armor, what do you want to do ?");
         System.out.println("\t\t1. Use it!");
         System.out.println("\t\t2. Continue without armor.");
-        int choiceArmor = sc.nextInt();
-         while (choiceArmor != 1 && choiceArmor != 2) {
+        int choiceArmor = 0;
+
+        do {
+            try {
+                choiceArmor = sc.nextInt();
+                continueInput = false;
+            } catch (Exception ex) {
+                System.out.println("\t\tInvalid command... Press a valid one !");
+                sc.nextLine();
+            }
+        } while (continueInput);
+        while (choiceArmor != 1 && choiceArmor != 2) {
             System.out.println("\t\tInvalid command... Press a valid one !");
             choiceArmor = sc.nextInt();
         }
+        continueInput = true;
         return choiceArmor;
     }
 }

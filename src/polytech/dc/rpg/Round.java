@@ -3,7 +3,6 @@ import polytech.dc.event.Controler;
 import java.util.Random;
 import polytech.dc.accessory.Accessory;
 import polytech.dc.accessory.HealthPotion;
-import polytech.dc.event.Action;
 import polytech.dc.event.DisplayStory;
 import polytech.dc.gameCharacters.Anubis;
 import polytech.dc.gameCharacters.Enemy;

@@ -1,11 +1,11 @@
-package polytech.dc.event;
+package polytech.dc.rpg;
 import java.util.Random;
 import polytech.dc.accessory.Armor;
 import polytech.dc.accessory.DamagePotion;
 import polytech.dc.accessory.HealthPotion;
+import polytech.dc.event.Controler;
 import polytech.dc.gameCharacters.Enemy;
 import polytech.dc.gameCharacters.Hero;
-import polytech.dc.rpg.Round;
 
 public class Action {
 
